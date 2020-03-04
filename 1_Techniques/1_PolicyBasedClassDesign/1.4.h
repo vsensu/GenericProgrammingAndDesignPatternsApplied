@@ -32,6 +32,16 @@ namespace _1_4 {
 //{
 //
 //}
+// 但可以通过偏特化class，再实现member function，进而implicit specialization
+    template <typename U> class Gadget<char, U>{
+    public:
+        void Fun();
+    };
+
+    template <typename U> void Gadget<char, U>::Fun()
+    {
+        std::cout << "partial" << std::endl;
+    }
 }
 
 template<>
@@ -43,6 +53,8 @@ void Part<1, 4>::Run() {
     widget_char.Fun();
     Gadget<int, char> gadget;
     gadget.Fun();
+    Gadget<char, int> partial_member;
+    partial_member.Fun();
 }
 
 #endif //GENERICPROGRAMMINGANDDESIGNPATTERNSAPPLIED_1_4_H
